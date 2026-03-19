@@ -82,6 +82,8 @@
                     <option value="Car">Car (1-3 pax)</option>
                     <option value="Van">Van (4-8 pax)</option>
                     <option value="Luxury SUV">Luxury SUV (1-4 pax)</option>
+                    <option value="Star Bus">Star Bus (Max 25 pax)</option>
+                    <option value="Full AC Bus">Full AC Bus (Max 50 pax)</option>
                 </select>
             </div>
             <div class="mb-3">
