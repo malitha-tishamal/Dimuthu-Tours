@@ -17,13 +17,37 @@ $tours = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $stmt = $pdo->query("SELECT * FROM reviews WHERE status='approved' ORDER BY id DESC LIMIT 5");
 $reviews = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+// Fetch Travel Memories
+$stmt = $pdo->query("SELECT * FROM travel_memories WHERE status = 'active' ORDER BY event_date DESC LIMIT 6");
+$memories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+foreach($memories as &$memory) {
+    $stmt = $pdo->prepare("SELECT image_path FROM memory_images WHERE memory_id = ?");
+    $stmt->execute([$memory['id']]);
+    $memory['images'] = $stmt->fetchAll(PDO::FETCH_COLUMN);
+}
+unset($memory);
+
+// Fetch Hero Slides
+$stmt = $pdo->query("SELECT * FROM hero_slides ORDER BY id ASC");
+$hero_slides = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
 include 'includes/header.php';
 ?>
 
 <!-- Hero Section -->
-<section class="hero-section text-white d-flex align-items-center" style="background-image: url('https://images.unsplash.com/photo-1588219463991-630e2f5ff50b?q=80&w=1920');" id="home">
+<section class="hero-section position-relative overflow-hidden" id="home">
+    <div id="heroCarousel" class="carousel slide carousel-fade h-100 w-100 position-absolute" data-bs-ride="carousel">
+        <div class="carousel-inner h-100">
+            <?php foreach($hero_slides as $index => $slide): ?>
+            <div class="carousel-item h-100 <?php echo $index == 0 ? 'active' : ''; ?>">
+                <div class="hero-slide-img h-100 w-100" style="background-image: url('<?php echo htmlspecialchars($slide['image_path']); ?>'); background-size: cover; background-position: center;"></div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+    
     <div class="hero-overlay"></div>
-    <div class="container hero-content text-center text-md-start">
+    <div class="container hero-content text-center text-md-start position-relative" style="z-index: 2;">
         <div class="row">
             <div class="col-lg-8">
                 <h1 class="display-3 fw-bold mb-3 animate__animated animate__fadeInDown"><?php echo htmlspecialchars($settings['hero_title']); ?></h1>
@@ -74,6 +98,58 @@ include 'includes/header.php';
             
             <?php if(empty($tours)): ?>
                 <div class="col-12 text-center text-muted">No tours available at the moment.</div>
+            <?php endif; ?>
+        </div>
+    </div>
+</section>
+
+<!-- Travel Memories Section -->
+<section class="section-padding bg-white" id="memories">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title fw-bold text-dark">Our Travel Memories</h2>
+            <p class="text-muted">Capturing moments and stories from our journeys</p>
+        </div>
+        
+        <div class="row g-4 justify-content-center">
+            <?php foreach($memories as $memory): ?>
+            <div class="col-lg-4 col-md-6">
+                <div class="card memory-card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
+                    <!-- Image Slider -->
+                    <div id="carouselMemory<?php echo $memory['id']; ?>" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <?php foreach($memory['images'] as $index => $img): ?>
+                            <div class="carousel-item <?php echo $index == 0 ? 'active' : ''; ?>">
+                                <img src="<?php echo htmlspecialchars($img); ?>" class="d-block w-100" style="height: 250px; object-fit: cover;" alt="Memory Photo">
+                            </div>
+                            <?php endforeach; ?>
+                        </div>
+                        <?php if(count($memory['images']) > 1): ?>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselMemory<?php echo $memory['id']; ?>" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselMemory<?php echo $memory['id']; ?>" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        <?php endif; ?>
+                    </div>
+                    
+                    <div class="card-body p-4">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge bg-light text-primary rounded-pill px-3 py-2 fw-semibold shadow-sm"><i class="fas fa-map-marker-alt me-1"></i> <?php echo htmlspecialchars($memory['location']); ?></span>
+                            <small class="text-muted fw-medium"><?php echo date('M Y', strtotime($memory['event_date'])); ?></small>
+                        </div>
+                        <h4 class="card-title fw-bold text-dark mt-2 mb-3"><?php echo htmlspecialchars($memory['title']); ?></h4>
+                        <p class="card-text text-muted line-clamp-3 small mb-0"><?php echo htmlspecialchars($memory['description']); ?></p>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+            
+            <?php if(empty($memories)): ?>
+                <div class="col-12 text-center text-muted">No memories shared yet.</div>
             <?php endif; ?>
         </div>
     </div>
