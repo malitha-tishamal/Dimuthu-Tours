@@ -91,14 +91,14 @@ include 'includes/header.php';
                     <div class="card-body p-4 text-center">
                         <h4 class="card-title fw-bold text-dark mb-3"><?php echo htmlspecialchars($tour['title']); ?></h4>
                         <p class="card-text text-muted small mb-4 line-clamp-2"><?php echo htmlspecialchars(substr($tour['description'], 0, 100)); ?>...</p>
-                        <button class="btn btn-outline-primary rounded-pill w-100 mb-2 view-tour-details" 
+                        <button class="view-tour-details rounded-pill w-100 mb-2" 
                                 data-bs-toggle="modal" 
                                 data-bs-target="#tourDetailsModal"
                                 data-title="<?php echo htmlspecialchars($tour['title']); ?>"
                                 data-desc="<?php echo htmlspecialchars($tour['description']); ?>"
                                 data-dur="<?php echo htmlspecialchars($tour['duration']); ?>"
                                 data-img="<?php echo htmlspecialchars($tour['image']); ?>">
-                            View Details <i class="fas fa-arrow-right ms-2 text-primary"></i>
+                            View Details <i class="fas fa-arrow-right ms-2"></i>
                         </button>
                     </div>
                 </div>
