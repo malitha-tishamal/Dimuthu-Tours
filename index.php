@@ -36,7 +36,7 @@ include 'includes/header.php';
 
 <!-- Hero Section -->
 <section class="hero-section position-relative overflow-hidden" id="home">
-    <div id="heroCarousel" class="carousel slide carousel-fade h-100 w-100 position-absolute" data-bs-ride="carousel">
+    <div id="heroCarousel" class="carousel slide carousel-fade h-100 w-100 position-absolute" data-bs-ride="carousel" data-bs-interval="10000">
         <div class="carousel-inner h-100">
             <?php foreach($hero_slides as $index => $slide): ?>
             <div class="carousel-item h-100 <?php echo $index == 0 ? 'active' : ''; ?>">
