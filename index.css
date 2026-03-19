@@ -186,6 +186,18 @@ h6 {
     background-position: center;
 }
 
+.carousel-control-prev:hover .carousel-control-prev-icon,
+.carousel-control-next:hover .carousel-control-next-icon {
+    background-color: var(--primary-color) !important;
+    opacity: 1 !important;
+    transform: scale(1.1);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    transition: all 0.3s ease;
+}
+
 .hero-overlay {
     position: absolute;
     inset: 0;
