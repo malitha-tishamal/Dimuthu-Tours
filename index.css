@@ -223,6 +223,38 @@ h6 {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
 }
 
+.view-tour-details {
+    background: #fdfdfd;
+    border: 1.5px solid #eee;
+    color: #555;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    margin-top: 15px;
+}
+
+.view-tour-details:hover {
+    background: var(--primary-color);
+    border-color: var(--primary-color);
+    color: white !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 111, 0, 0.15);
+}
+
+.view-tour-details i {
+    transition: transform 0.3s ease;
+    margin-left: 8px;
+}
+
+.view-tour-details:hover i {
+    transform: translateX(4px);
+}
+
 .tour-card img {
     height: 250px;
     object-fit: cover;
