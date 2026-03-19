@@ -181,6 +181,20 @@ $safaris = [
                             <small class="text-muted">Max 4 pax</small>
                         </div>
                     </div>
+                    <div class="col-sm-6">
+                        <div class="p-3 border rounded text-center shadow-sm">
+                            <i class="fas fa-bus fs-2 text-primary mb-2"></i>
+                            <h6 class="fw-bold mb-0">Star Bus</h6>
+                            <small class="text-muted">Max 25 pax</small>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="p-3 border rounded text-center shadow-sm">
+                            <i class="fas fa-bus-alt fs-2 text-primary mb-2"></i>
+                            <h6 class="fw-bold mb-0">Full AC Bus</h6>
+                            <small class="text-muted">Max 50 pax</small>
+                        </div>
+                    </div>
                 </div>
                 <button class="btn btn-primary btn-lg rounded-pill px-5 shadow-sm" data-bs-toggle="modal" data-bs-target="#taxiModal">Book a Ride <i class="fas fa-arrow-right ms-2"></i></button>
             </div>
