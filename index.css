@@ -18,29 +18,48 @@ body {
     scroll-behavior: smooth;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--font-heading);
     font-weight: 700;
 }
 
 /* Custom Utilities */
-.text-primary { color: var(--primary-color) !important; }
-.bg-primary { background-color: var(--primary-color) !important; }
-.btn-primary { 
-    background-color: var(--primary-color); 
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+.bg-primary {
+    background-color: var(--primary-color) !important;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
     border-color: var(--primary-color);
 }
+
 .btn-primary:hover {
     background-color: var(--primary-hover);
     border-color: var(--primary-hover);
 }
 
-.text-success { color: var(--success-color) !important; }
-.bg-success { background-color: var(--success-color) !important; }
-.btn-success { 
-    background-color: var(--success-color); 
+.text-success {
+    color: var(--success-color) !important;
+}
+
+.bg-success {
+    background-color: var(--success-color) !important;
+}
+
+.btn-success {
+    background-color: var(--success-color);
     border-color: var(--success-color);
 }
+
 .btn-success:hover {
     background-color: var(--success-hover);
     border-color: var(--success-hover);
@@ -56,12 +75,15 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 1.5rem;
     font-weight: 700;
 }
+
 .navbar-nav .nav-link {
     color: #444;
     transition: color 0.3s;
     padding: 0.5rem 1rem;
 }
-.navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
     color: var(--primary-color) !important;
 }
 
@@ -77,28 +99,100 @@ h1, h2, h3, h4, h5, h6 {
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     box-shadow: 0 4px 15px rgba(46, 125, 50, 0.3) !important;
 }
+
 .whatsapp-float:hover {
     transform: scale(1.1) rotate(5deg);
     color: white;
 }
 
+/* Floating Map Button */
+.map-float {
+    position: fixed;
+    bottom: 105px;
+    /* Above WhatsApp button */
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    z-index: 1000;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3) !important;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid #fff;
+    overflow: hidden;
+    background-color: white;
+}
+
+.map-float:hover {
+    transform: scale(1.1) rotate(-5deg);
+}
+
+.map-float img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* Memory Card Styling */
+.memory-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.memory-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1) !important;
+}
+.memory-card .carousel-item img {
+    transition: transform 0.5s ease;
+}
+.memory-card:hover .carousel-item img {
+    transform: scale(1.05);
+}
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;  
+    overflow: hidden;
+    line-clamp: 3;
+}
+
+/* Mobile Responsiveness Improvements */
+@media (max-width: 768px) {
+    .display-3 { font-size: 2.5rem; }
+    .display-4 { font-size: 2rem; }
+    .section-padding { padding: 60px 0; }
+    .hero-section { min-height: 80vh; }
+    .card-title { font-size: 1.25rem; }
+    .btn-lg { padding: 12px 30px; font-size: 1rem; }
+    
+    /* Make sliders more touch-friendly */
+    .carousel-control-prev, .carousel-control-next {
+        width: 10%;
+    }
+}
+
 /* Hero Section */
 .hero-section {
     position: relative;
-    height: 80vh;
+    height: 100vh;
     min-height: 600px;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
     display: flex;
     align-items: center;
+    color: white;
 }
+
+.hero-slide-img {
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+}
+
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.3) 100%);
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 100%);
     z-index: 1;
 }
+
 .hero-content {
     position: relative;
     z-index: 2;
@@ -111,14 +205,17 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 12px;
     overflow: hidden;
 }
+
 .tour-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1) !important;
 }
+
 .tour-card img {
     height: 250px;
     object-fit: cover;
 }
+
 .card-badge {
     position: absolute;
     top: 15px;
@@ -130,6 +227,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 0.85rem;
     font-weight: 600;
 }
+
 .safari-card img {
     height: 200px;
     object-fit: cover;
@@ -141,24 +239,27 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 15px;
     border-left: 4px solid var(--primary-color);
 }
+
 .review-img {
     width: 60px;
     height: 60px;
     object-fit: cover;
     border-radius: 50%;
 }
+
 .star-rating i {
     color: #ffc107;
 }
 
 /* Footer */
 .footer-links a {
-    color: rgba(255,255,255,0.5);
+    color: rgba(255, 255, 255, 0.5);
     text-decoration: none;
     display: block;
     margin-bottom: 8px;
     transition: all 0.3s;
 }
+
 .footer-links a:hover {
     color: var(--primary-color);
     padding-left: 5px;
@@ -168,11 +269,13 @@ h1, h2, h3, h4, h5, h6 {
 .section-padding {
     padding: 80px 0;
 }
+
 .section-title {
     position: relative;
     margin-bottom: 50px;
     padding-bottom: 20px;
 }
+
 .section-title::after {
     content: '';
     position: absolute;
