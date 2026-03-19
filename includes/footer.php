@@ -5,6 +5,8 @@
     <i class="fab fa-whatsapp fs-2"></i>
 </a>
 
+
+
 <!-- Booking Global Modal -->
 <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
