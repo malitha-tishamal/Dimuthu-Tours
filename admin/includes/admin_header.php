@@ -35,6 +35,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <a href="tours.php" class="<?php echo $current_page == 'tours.php' ? 'active' : ''; ?>"><i class="fas fa-map ms-2 me-3"></i>Manage Tours</a>
             <a href="bookings.php" class="<?php echo $current_page == 'bookings.php' ? 'active' : ''; ?>"><i class="fas fa-calendar-check ms-2 me-3"></i>Tour Bookings</a>
             <a href="taxi_bookings.php" class="<?php echo $current_page == 'taxi_bookings.php' ? 'active' : ''; ?>"><i class="fas fa-taxi ms-2 me-3"></i>Taxi Bookings</a>
+            <a href="memories.php" class="<?php echo $current_page == 'memories.php' ? 'active' : ''; ?>"><i class="fas fa-camera-retro ms-2 me-3"></i>Travel Memories</a>
+            <a href="hero_slider.php" class="<?php echo $current_page == 'hero_slider.php' ? 'active' : ''; ?>"><i class="fas fa-images ms-2 me-3"></i>Hero Slider</a>
             <a href="reviews.php" class="<?php echo $current_page == 'reviews.php' ? 'active' : ''; ?>"><i class="fas fa-star ms-2 me-3"></i>Guest Reviews</a>
             <a href="settings.php" class="<?php echo $current_page == 'settings.php' ? 'active' : ''; ?>"><i class="fas fa-cog ms-2 me-3"></i>Site Settings</a>
         </div>
