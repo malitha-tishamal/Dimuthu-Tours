@@ -11,6 +11,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_settings'])) {
     $stmt->execute([$_POST['whatsapp'], 'whatsapp']);
     $stmt->execute([$_POST['about_text'], 'about_text']);
     
+    // Social Media Links
+    $stmt->execute([$_POST['facebook'], 'facebook']);
+    $stmt->execute([$_POST['instagram'], 'instagram']);
+    $stmt->execute([$_POST['tiktok'], 'tiktok']);
+    $stmt->execute([$_POST['whatsapp_link'], 'whatsapp_link']);
+    
     $msg = "Settings updated successfully.";
 }
 
@@ -59,6 +65,27 @@ foreach($raw as $r) {
                     <label class="form-label">WhatsApp Number (For Link)</label>
                     <input type="text" name="whatsapp" class="form-control" value="<?php echo htmlspecialchars($s['whatsapp']); ?>">
                     <small class="text-muted">Include country code without +, e.g. 94711635975</small>
+                </div>
+            </div>
+
+            <h5 class="fw-bold mb-3 mt-4 text-primary border-bottom pb-2">Social Media Links</h5>
+            <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Facebook Profile Link</label>
+                    <input type="url" name="facebook" class="form-control" value="<?php echo htmlspecialchars($s['facebook']); ?>">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Instagram Profile Link</label>
+                    <input type="url" name="instagram" class="form-control" value="<?php echo htmlspecialchars($s['instagram']); ?>">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">TikTok Profile Link</label>
+                    <input type="url" name="tiktok" class="form-control" value="<?php echo htmlspecialchars($s['tiktok']); ?>">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">WhatsApp Direct Link</label>
+                    <input type="url" name="whatsapp_link" class="form-control" value="<?php echo htmlspecialchars($s['whatsapp_link']); ?>">
+                    <small class="text-muted">Direct link like https://wa.me/message/...</small>
                 </div>
             </div>
             
