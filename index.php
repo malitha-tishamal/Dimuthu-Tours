@@ -481,18 +481,15 @@ $safaris = [
 </div>
 
 <!-- Full Screen Map Modal -->
-<div class="modal fade modal-fullscreen" id="mapModal" tabindex="-1" aria-hidden="true">
+<div class="modal fade modal-fullscreen" id="mapModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="false">
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header border-0 pb-0 w-100 d-flex justify-content-between align-items-center px-4" style="position: absolute; top:0; z-index: 10;">
-                <h4 class="text-white fw-bold mb-0">Sri Lanka Tour Map</h4>
+                <h4 class="text-white fw-bold mb-0">Sri Lanka Tour Map <small class="fw-normal fs-6 ms-2 text-white-50">(Click map to zoom)</small></h4>
                 <button type="button" class="btn-close btn-close-white fs-4" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <img src="assets/tour-map.jpg" class="map-full-img" alt="Sri Lanka Tour Map Full">
-            </div>
-            <div class="modal-footer border-0 justify-content-center pb-4">
-                <button type="button" class="btn btn-primary px-5 rounded-pill fw-bold" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#taxiModal">Plan Your Route Now</button>
             </div>
         </div>
     </div>
@@ -682,6 +679,29 @@ document.addEventListener('DOMContentLoaded', () => {
         closeBtn.addEventListener('click', (e) => {
             e.stopPropagation();
             ad.classList.add('d-none');
+        });
+
+        // Zoom & Background Close for Map Modal
+        const mapImg = document.querySelector('.map-full-img');
+        const mapModalEl = document.getElementById('mapModal');
+        const modalBody = mapModalEl.querySelector('.modal-body');
+
+        if(mapImg) {
+            mapImg.addEventListener('click', function(e) {
+                e.stopPropagation();
+                this.classList.toggle('zoomed');
+            });
+        }
+
+        if(modalBody) {
+            modalBody.addEventListener('click', function() {
+                mapModal.hide();
+            });
+        }
+
+        // Reset zoom when modal closes
+        mapModalEl.addEventListener('hidden.bs.modal', function () {
+            if(mapImg) mapImg.classList.remove('zoomed');
         });
     }
 });
