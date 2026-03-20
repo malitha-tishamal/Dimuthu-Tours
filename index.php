@@ -9,6 +9,16 @@ foreach($settings_raw as $s) {
     $settings[$s['key_name']] = $s['value'];
 }
 
+// Fetch Vehicles
+$v_stmt = $pdo->query("SELECT * FROM vehicles WHERE status = 'active'");
+$vehicles = $v_stmt->fetchAll(PDO::FETCH_ASSOC);
+foreach ($vehicles as &$v) {
+    $img_stmt = $pdo->prepare("SELECT * FROM vehicle_images WHERE vehicle_id = ?");
+    $img_stmt->execute([$v['id']]);
+    $v['images'] = $img_stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+unset($v); // Unset reference to avoid issues
+
 // Fetch Tours
 $stmt = $pdo->query("SELECT * FROM tours WHERE status='active' ORDER BY id DESC");
 $tours = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -63,7 +73,7 @@ include 'includes/header.php';
                 <p class="lead fs-3 mb-5 fw-light animate__animated animate__fadeInUp animate__delay-1s"><?php echo htmlspecialchars($settings['hero_subtitle']); ?></p>
                 <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-md-start animate__animated animate__fadeInUp animate__delay-2s">
                     <button class="btn btn-primary btn-lg rounded-pill px-5 shadow-sm" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</button>
-                    <a href="https://wa.me/<?php echo str_replace(['+',' '], '', $settings['whatsapp']); ?>" class="btn btn-success btn-lg rounded-pill px-5 shadow-sm" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp me-2"></i> WhatsApp Us</a>
+                    <a href="<?php echo htmlspecialchars($settings['whatsapp_link'] ?? 'https://wa.me/'.str_replace(['+',' '], '', $settings['whatsapp'])); ?>" class="btn btn-success btn-lg rounded-pill px-5 shadow-sm" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp me-2"></i> WhatsApp Us</a>
                 </div>
             </div>
         </div>
@@ -245,41 +255,69 @@ $safaris = [
                 <h2 class="fw-bold mb-4 text-dark">Reliable Taxi & Transfer Services</h2>
                 <p class="text-muted mb-4">Need a comfortable ride? We offer reliable airport transfers and point-to-point taxi services across Sri Lanka with professional drivers.</p>
                 <div class="row g-3 mb-4">
-                    <div class="col-sm-4">
-                        <div class="p-3 border rounded text-center shadow-sm">
-                            <i class="fas fa-car fs-2 text-primary mb-2"></i>
-                            <h6 class="fw-bold mb-0">Cars</h6>
-                            <small class="text-muted">Max 3 pax</small>
+                    <?php if(!empty($vehicles)): ?>
+                        <?php foreach($vehicles as $v): ?>
+                            <div class="col-sm-4">
+                                <div class="p-3 border rounded text-center shadow-sm h-100 taxi-card position-relative overflow-hidden" 
+                                     style="cursor: pointer;" 
+                                     data-bs-toggle="modal" 
+                                     data-bs-target="#vehicleDetailsModal<?php echo $v['id']; ?>">
+                                    <div class="taxi-card-overlay">
+                                        <span class="small fw-bold text-white"><i class="fas fa-search-plus me-1"></i> View Vehicle</span>
+                                    </div>
+                                    <i class="<?php echo $v['icon_class']; ?> fs-2 text-primary mb-2"></i>
+                                    <h6 class="fw-bold mb-0"><?php echo htmlspecialchars($v['name']); ?></h6>
+                                    <small class="text-muted d-block mb-1"><?php echo htmlspecialchars($v['pax_count']); ?></small>
+                                    <span class="text-primary x-small fw-bold text-uppercase d-block" style="font-size: 0.65rem;">Click to view vehicle</span>
+                                </div>
+                            </div>
+
+                            <!-- Vehicle Details Modal -->
+                            <div class="modal fade" id="vehicleDetailsModal<?php echo $v['id']; ?>" tabindex="-1" aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-centered">
+                                    <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+                                        <div class="modal-header border-0 pb-0 bg-light">
+                                            <h5 class="modal-title fw-bold text-dark"><?php echo htmlspecialchars($v['name']); ?> Gallery</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body p-4">
+                                            <?php if(!empty($v['images'])): ?>
+                                                <div class="row g-3">
+                                                    <?php foreach($v['images'] as $img): ?>
+                                                        <div class="col-md-6">
+                                                            <div class="rounded-3 overflow-hidden shadow-sm border" style="height: 250px;">
+                                                                <img src="<?php echo htmlspecialchars($img['image_path']); ?>" class="w-100 h-100 object-fit-cover" alt="Vehicle Image">
+                                                            </div>
+                                                        </div>
+                                                    <?php endforeach; ?>
+                                                </div>
+                                            <?php else: ?>
+                                                <div class="text-center py-5 text-muted">
+                                                    <i class="fas fa-images fs-1 mb-3 opacity-25"></i>
+                                                    <p>No images available for this vehicle yet.</p>
+                                                </div>
+                                            <?php endif; ?>
+                                            
+                                            <div class="mt-4 p-3 bg-light rounded-3 d-flex align-items-center justify-content-between">
+                                                <div>
+                                                    <h6 class="fw-bold mb-1"><?php echo htmlspecialchars($v['name']); ?></h6>
+                                                    <p class="mb-0 text-muted small"><i class="fas fa-users me-2"></i>Capacity: <?php echo htmlspecialchars($v['pax_count']); ?></p>
+                                                </div>
+                                                <button class="btn btn-success rounded-pill px-4 fw-bold" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#taxiModal">
+                                                    Book This Ride
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="col-12 text-center py-4 bg-light rounded shadow-sm border">
+                            <i class="fas fa-info-circle text-muted mb-2"></i>
+                            <p class="mb-0 text-muted small">No vehicles available at the moment.</p>
                         </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="p-3 border rounded text-center shadow-sm">
-                            <i class="fas fa-shuttle-van fs-2 text-primary mb-2"></i>
-                            <h6 class="fw-bold mb-0">Vans</h6>
-                            <small class="text-muted">Max 8 pax</small>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="p-3 border rounded text-center shadow-sm">
-                            <i class="fas fa-car-side fs-2 text-primary mb-2"></i>
-                            <h6 class="fw-bold mb-0">Luxury SUV</h6>
-                            <small class="text-muted">Max 4 pax</small>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="p-3 border rounded text-center shadow-sm">
-                            <i class="fas fa-bus fs-2 text-primary mb-2"></i>
-                            <h6 class="fw-bold mb-0">Star Bus</h6>
-                            <small class="text-muted">Max 25 pax</small>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="p-3 border rounded text-center shadow-sm">
-                            <i class="fas fa-bus-alt fs-2 text-primary mb-2"></i>
-                            <h6 class="fw-bold mb-0">Full AC Bus</h6>
-                            <small class="text-muted">Max 50 pax</small>
-                        </div>
-                    </div>
+                    <?php endif; ?>
                 </div>
                 <button class="btn btn-primary btn-lg rounded-pill px-5 shadow-sm" data-bs-toggle="modal" data-bs-target="#taxiModal">Book a Ride <i class="fas fa-arrow-right ms-2"></i></button>
             </div>
@@ -354,6 +392,19 @@ $safaris = [
                             <small class="text-muted"><?php echo htmlspecialchars($settings['email']); ?></small>
                         </div>
                     </a>
+                </div>
+
+                <div class="d-flex gap-3 mb-4">
+                    <?php if(!empty($settings['facebook'])): ?>
+                        <a href="<?php echo htmlspecialchars($settings['facebook']); ?>" target="_blank" class="btn btn-outline-primary rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 45px; height: 45px;"><i class="fab fa-facebook-f"></i></a>
+                    <?php endif; ?>
+                    <?php if(!empty($settings['instagram'])): ?>
+                        <a href="<?php echo htmlspecialchars($settings['instagram']); ?>" target="_blank" class="btn btn-outline-danger rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 45px; height: 45px;"><i class="fab fa-instagram"></i></a>
+                    <?php endif; ?>
+                    <?php if(!empty($settings['tiktok'])): ?>
+                        <a href="<?php echo htmlspecialchars($settings['tiktok']); ?>" target="_blank" class="btn btn-outline-dark rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 45px; height: 45px;"><i class="fab fa-tiktok"></i></a>
+                    <?php endif; ?>
+                    <a href="<?php echo htmlspecialchars($settings['whatsapp_link'] ?? 'https://wa.me/'.str_replace(['+',' '], '', $settings['whatsapp'])); ?>" target="_blank" class="btn btn-outline-success rounded-circle d-flex align-items-center justify-content-center shadow-sm" style="width: 45px; height: 45px;"><i class="fab fa-whatsapp"></i></a>
                 </div>
                 
                 <button class="btn btn-success btn-lg rounded-pill px-5 shadow" data-bs-toggle="modal" data-bs-target="#bookingModal">Contact Us</button>
@@ -567,5 +618,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 </script>
+
+<!-- Developer Highlight Section (Body) -->
+<section class="py-5 bg-white border-top">
+    <div class="container text-center">
+        <div class="d-inline-block p-4 rounded-4 shadow-sm border border-light animate__animated animate__fadeInUp">
+            <p class="text-muted mb-2 small text-uppercase tracking-widest fw-bold">Professional Web Solutions</p>
+            <h3 class="fw-bold mb-3">Designed & Developed By</h3>
+            <div class="d-flex align-items-center justify-content-center gap-3 mb-3" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#developerModal">
+                <img src="assets/developer.jpg" class="rounded-circle shadow-sm border border-success border-2" style="width: 80px; height: 80px; object-fit: cover;" alt="Malitha Tishamal">
+                <div class="text-start">
+                    <h4 class="mb-0 fw-bold text-dark">Malitha Tishamal</h4>
+                    <p class="text-success mb-0 fw-medium">Full Stack Developer</p>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center gap-2 mb-3">
+                <a href="http://malithatishamal.42web.io" target="_blank" class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;"><i class="bi bi-globe"></i></a>
+                <a href="https://x.com/MalithaTishamal" target="_blank" class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;"><i class="bi bi-twitter-x"></i></a>
+                <a href="https://www.linkedin.com/in/malitha-tishamal" target="_blank" class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;"><i class="bi bi-linkedin"></i></a>
+                <a href="https://github.com/malitha-tishamal" target="_blank" class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;"><i class="bi bi-github"></i></a>
+            </div>
+            <a href="https://wa.me/94785530992" target="_blank" class="btn btn-success rounded-pill px-4 fw-bold">
+                <i class="fab fa-whatsapp me-2"></i> Hire the Developer
+            </a>
+        </div>
+    </div>
+</section>
 
 <?php include 'includes/footer.php'; ?>
