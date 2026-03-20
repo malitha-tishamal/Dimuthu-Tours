@@ -72,5 +72,19 @@
 
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Global JS Scripts -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Global Modal Backdrop Close Logic
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('modal')) {
+            const modalInstance = bootstrap.Modal.getInstance(e.target);
+            if (modalInstance) {
+                modalInstance.hide();
+            }
+        }
+    });
+});
+</script>
 </body>
 </html>
