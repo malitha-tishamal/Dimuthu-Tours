@@ -16,6 +16,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <link rel="icon" type="image/jpeg" href="../assets/logo.jpg">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <style>
         .sidebar { min-height: 100vh; background: #343a40; }
         .sidebar a { color: rgba(255,255,255,0.8); text-decoration: none; padding: 12px 20px; display: block; }
@@ -39,6 +40,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <a href="hero_slider.php" class="<?php echo $current_page == 'hero_slider.php' ? 'active' : ''; ?>"><i class="fas fa-images ms-2 me-3"></i>Hero Slider</a>
             <a href="reviews.php" class="<?php echo $current_page == 'reviews.php' ? 'active' : ''; ?>"><i class="fas fa-star ms-2 me-3"></i>Guest Reviews</a>
             <a href="settings.php" class="<?php echo $current_page == 'settings.php' ? 'active' : ''; ?>"><i class="fas fa-cog ms-2 me-3"></i>Site Settings</a>
+            <a href="vehicles.php" class="<?php echo $current_page == 'vehicles.php' ? 'active' : ''; ?>"><i class="fas fa-taxi ms-2 me-3"></i>Manage Vehicles</a>
         </div>
         <div class="mt-auto border-top border-secondary position-absolute bottom-0 w-100" style="max-width: 250px;">
             <a href="logout.php" class="text-danger"><i class="fas fa-sign-out-alt ms-2 me-3"></i>Logout</a>
