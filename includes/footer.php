@@ -1,7 +1,7 @@
 <!-- Main content ends here -->
 
 <!-- Floating WhatsApp Button -->
-<a href="https://wa.me/94711635975?text=Hello%20Dimu%20Tours!%20I%20would%20like%20to%20plan%20a%20trip." class="whatsapp-float bg-success text-white rounded-circle shadow d-flex align-items-center justify-content-center" target="_blank" rel="noopener noreferrer">
+<a href="<?php echo htmlspecialchars($settings['whatsapp_link'] ?? 'https://wa.me/'.$settings['whatsapp']); ?>" class="whatsapp-float bg-success text-white rounded-circle shadow d-flex align-items-center justify-content-center" target="_blank" rel="noopener noreferrer">
     <i class="fab fa-whatsapp fs-2"></i>
 </a>
 
@@ -112,9 +112,16 @@
                 </div>
                 <p class="text-white-50">Your trusted partner for unforgettable experiences. From cultural highlights to thrilling wildlife safaris.</p>
                 <div class="d-flex gap-3 mt-3">
-                    <a href="#" class="text-white-50 text-hover-primary fs-5"><i class="fab fa-facebook"></i></a>
-                    <a href="#" class="text-white-50 text-hover-primary fs-5"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="text-white-50 text-hover-primary fs-5"><i class="fab fa-tripadvisor"></i></a>
+                    <?php if(!empty($settings['facebook'])): ?>
+                        <a href="<?php echo htmlspecialchars($settings['facebook']); ?>" target="_blank" class="text-white-50 text-hover-primary fs-5"><i class="fab fa-facebook"></i></a>
+                    <?php endif; ?>
+                    <?php if(!empty($settings['instagram'])): ?>
+                        <a href="<?php echo htmlspecialchars($settings['instagram']); ?>" target="_blank" class="text-white-50 text-hover-primary fs-5"><i class="fab fa-instagram"></i></a>
+                    <?php endif; ?>
+                    <?php if(!empty($settings['tiktok'])): ?>
+                        <a href="<?php echo htmlspecialchars($settings['tiktok']); ?>" target="_blank" class="text-white-50 text-hover-primary fs-5"><i class="fab fa-tiktok"></i></a>
+                    <?php endif; ?>
+                    <a href="https://wa.me/<?php echo str_replace(['+',' '], '', $settings['whatsapp']); ?>" target="_blank" class="text-white-50 text-hover-primary fs-5"><i class="fab fa-whatsapp"></i></a>
                 </div>
             </div>
             <div class="col-lg-2 col-md-6">
@@ -129,9 +136,9 @@
             <div class="col-lg-3 col-md-6">
                 <h5 class="mb-3 text-white">Contact Info</h5>
                 <ul class="list-unstyled text-white-50">
-                    <li class="mb-2"><i class="fas fa-map-marker-alt me-2 text-primary"></i> Colombo, Sri Lanka</li>
-                    <li class="mb-2"><i class="fas fa-phone me-2 text-primary"></i> <a href="tel:+94711635975" class="text-white-50 text-decoration-none">+94 71 163 5975</a></li>
-                    <li class="mb-2"><i class="fas fa-envelope me-2 text-primary"></i> <a href="mailto:info@dimutours.com" class="text-white-50 text-decoration-none">info@dimutours.com</a></li>
+                    <li class="mb-2"><i class="fas fa-map-marker-alt me-2 text-primary"></i> Palalla Road, Weligama, Sri Lanka</li>
+                    <li class="mb-2"><i class="fas fa-phone me-2 text-primary"></i> <a href="tel:<?php echo htmlspecialchars($settings['phone1']); ?>" class="text-white-50 text-decoration-none"><?php echo htmlspecialchars($settings['phone1']); ?></a></li>
+                    <li class="mb-2"><i class="fas fa-envelope me-2 text-primary"></i> <a href="mailto:<?php echo htmlspecialchars($settings['email']); ?>" class="text-white-50 text-decoration-none"><?php echo htmlspecialchars($settings['email']); ?></a></li>
                 </ul>
             </div>
             <div class="col-lg-3 col-md-6">
@@ -150,8 +157,7 @@
                 <span class="d-none d-md-inline text-white-50 mx-2">|</span>
                 <br class="d-md-none">
                 <small class="text-white-50 mt-2 mt-md-0 d-inline-block">
-                    Developed By <a href="http://malithatishamal.42web.io" target="_blank" class="text-success text-decoration-none fw-bold">Malitha Tishamal</a> @2026
-                    <a href="https://www.linkedin.com/" target="_blank" class="text-white-50 text-hover-primary ms-1 text-decoration-none"><i class="fab fa-linkedin fs-6 align-middle"></i></a>
+                    Developed By <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#developerModal" class="text-success text-decoration-none fw-bold">Malitha Tishamal</a> @2026
                 </small>
             </div>
             <div class="col-md-4 text-center text-md-end mt-3 mt-md-0">
@@ -160,6 +166,47 @@
         </div>
     </div>
 </footer>
+
+<!-- Developer Info Modal -->
+<div class="modal fade" id="developerModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg rounded-4 overflow-hidden">
+      <div class="modal-body p-0">
+        <div class="row g-0">
+          <div class="col-md-5 d-none d-md-block">
+            <img src="assets/developer.jpg" class="h-100 w-100 object-fit-cover" alt="Developer">
+          </div>
+          <div class="col-md-7 p-4 p-md-5">
+            <button type="button" class="btn-close float-end" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h4 class="fw-bold mb-1">Malitha Tishamal</h4>
+            <p class="text-primary fw-semibold mb-3">Full Stack Developer & UI/UX Designer</p>
+            
+            <p class="text-muted small mb-4">I specialize in creating modern, high-performance web applications and digital solutions. Contact me for professional web development services.</p>
+            
+            <div class="mb-4">
+              <h6 class="fw-bold mb-2">Connect with me:</h6>
+              <div class="d-flex gap-2 mb-3">
+                <a href="http://malithatishamal.42web.io" target="_blank" class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;"><i class="bi bi-globe"></i></a>
+                <a href="https://x.com/MalithaTishamal" target="_blank" class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;"><i class="bi bi-twitter-x"></i></a>
+                <a href="https://www.linkedin.com/in/malitha-tishamal" target="_blank" class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;"><i class="bi bi-linkedin"></i></a>
+                <a href="https://github.com/malitha-tishamal" target="_blank" class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;"><i class="bi bi-github"></i></a>
+                <a href="https://www.instagram.com/malithatishamal" target="_blank" class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;"><i class="bi bi-instagram"></i></a>
+                <a href="https://www.facebook.com/malitha.tishamal" target="_blank" class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 35px; height: 35px;"><i class="bi bi-facebook"></i></a>
+              </div>
+            </div>
+            
+            <div class="bg-light p-3 rounded-3 border border-success border-opacity-25 text-center">
+              <p class="mb-1 small text-muted">Direct Contact:</p>
+              <a href="https://wa.me/94785530992" target="_blank" class="btn btn-success w-100 fw-bold rounded-pill">
+                <i class="fab fa-whatsapp me-2"></i> 078 553 0992
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- Bootstrap 5 JS Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
