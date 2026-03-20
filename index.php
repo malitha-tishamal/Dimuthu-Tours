@@ -472,6 +472,31 @@ $safaris = [
     </div>
   </div>
 </div>
+
+<!-- Floating Tour Map Ad -->
+<div class="tour-map-ad d-none" id="tourMapAd">
+    <div class="close-ad" id="closeMapAd"><i class="fas fa-times"></i></div>
+    <img src="assets/tour-map.jpg" alt="SL Tour Map">
+    <span class="ad-label"><i class="fas fa-map-marked-alt me-1"></i> View Tour Map</span>
+</div>
+
+<!-- Full Screen Map Modal -->
+<div class="modal fade modal-fullscreen" id="mapModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0 pb-0 w-100 d-flex justify-content-between align-items-center px-4" style="position: absolute; top:0; z-index: 10;">
+                <h4 class="text-white fw-bold mb-0">Sri Lanka Tour Map</h4>
+                <button type="button" class="btn-close btn-close-white fs-4" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img src="assets/tour-map.jpg" class="map-full-img" alt="Sri Lanka Tour Map Full">
+            </div>
+            <div class="modal-footer border-0 justify-content-center pb-4">
+                <button type="button" class="btn btn-primary px-5 rounded-pill fw-bold" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#taxiModal">Plan Your Route Now</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Add Review Modal -->
 <div class="modal fade" id="addReviewModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
@@ -491,14 +516,21 @@ $safaris = [
                 <input type="text" name="country" class="form-control" required>
             </div>
             <div class="mb-3">
-                <label class="form-label">Rating (1-5)</label>
-                <select name="rating" class="form-select" required>
-                    <option value="5">5 - Excellent</option>
-                    <option value="4">4 - Very Good</option>
-                    <option value="3">3 - Average</option>
-                    <option value="2">2 - Poor</option>
-                    <option value="1">1 - Terrible</option>
-                </select>
+                <label class="form-label">Rating</label>
+                <div class="dropdown w-100">
+                    <button class="btn btn-outline-secondary w-100 text-start d-flex justify-content-between align-items-center py-2" type="button" id="ratingDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 8px;">
+                        <span id="selectedRating"><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i> 5 - Excellent</span>
+                        <i class="fas fa-chevron-down small"></i>
+                    </button>
+                    <ul class="dropdown-menu w-100 shadow-sm border-0 mt-1 rounded-3" aria-labelledby="ratingDropdown">
+                        <li><a class="dropdown-item py-2 rating-opt" href="#" data-value="5"><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i> 5 - Excellent</a></li>
+                        <li><a class="dropdown-item py-2 rating-opt" href="#" data-value="4"><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="far fa-star text-warning"></i> 4 - Very Good</a></li>
+                        <li><a class="dropdown-item py-2 rating-opt" href="#" data-value="3"><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="far fa-star text-warning"></i><i class="far fa-star text-warning"></i> 3 - Average</a></li>
+                        <li><a class="dropdown-item py-2 rating-opt" href="#" data-value="2"><i class="fas fa-star text-warning"></i><i class="fas fa-star text-warning"></i><i class="far fa-star text-warning"></i><i class="far fa-star text-warning"></i><i class="far fa-star text-warning"></i> 2 - Poor</a></li>
+                        <li><a class="dropdown-item py-2 rating-opt" href="#" data-value="1"><i class="fas fa-star text-warning"></i><i class="far fa-star text-warning"></i><i class="far fa-star text-warning"></i><i class="far fa-star text-warning"></i><i class="far fa-star text-warning"></i> 1 - Terrible</a></li>
+                    </ul>
+                </div>
+                <input type="hidden" name="rating" id="finalRating" value="5" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Review Message</label>
@@ -614,6 +646,42 @@ document.addEventListener('DOMContentLoaded', () => {
                 btn.disabled = false;
                 btn.innerHTML = 'Submit Review';
             });
+        });
+    }
+
+    // Custom Rating Dropdown Logic
+    const ratingOpts = document.querySelectorAll('.rating-opt');
+    const finalRatingInput = document.getElementById('finalRating');
+    const selectedRatingSpan = document.getElementById('selectedRating');
+
+    ratingOpts.forEach(opt => {
+        opt.addEventListener('click', function(e) {
+            e.preventDefault();
+            const val = this.getAttribute('data-value');
+            finalRatingInput.value = val;
+            selectedRatingSpan.innerHTML = this.innerHTML;
+        });
+    });
+
+    // Tour Map Ad Logic
+    const ad = document.getElementById('tourMapAd');
+    const closeBtn = document.getElementById('closeMapAd');
+    const mapModal = new bootstrap.Modal(document.getElementById('mapModal'));
+
+    if(ad) {
+        // Show ad after 3 seconds
+        setTimeout(() => {
+            ad.classList.remove('d-none');
+        }, 3000);
+
+        ad.addEventListener('click', (e) => {
+            if(e.target.closest('#closeMapAd')) return;
+            mapModal.show();
+        });
+
+        closeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            ad.classList.add('d-none');
         });
     }
 });
