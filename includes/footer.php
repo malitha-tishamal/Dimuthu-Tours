@@ -319,6 +319,16 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+
+    // Global Modal Backdrop Close Logic
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('modal') && !e.target.classList.contains('modal-static')) {
+            const modalInstance = bootstrap.Modal.getInstance(e.target);
+            if (modalInstance) {
+                modalInstance.hide();
+            }
+        }
+    });
 });
 </script>
 </body>
