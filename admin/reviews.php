@@ -114,12 +114,30 @@ $reviews = $pdo->query("SELECT * FROM reviews ORDER BY id DESC")->fetchAll();
             <input type="text" name="country" class="form-control" value="<?php echo htmlspecialchars($r['country']); ?>" required>
         </div>
         <div class="mb-3">
-            <label>Rating (1-5)</label>
-            <select name="rating" class="form-select">
-                <?php for($i=1; $i<=5; $i++): ?>
-                    <option value="<?php echo $i; ?>" <?php echo $i == $r['rating'] ? 'selected' : ''; ?>><?php echo $i; ?></option>
-                <?php endfor; ?>
-            </select>
+            <label class="form-label">Rating</label>
+            <div class="dropdown w-100">
+                <button class="btn btn-outline-secondary w-100 text-start d-flex justify-content-between align-items-center py-2 rating-toggle-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius: 8px;">
+                    <span class="selected-rating-text">
+                        <?php 
+                        for($i=1; $i<=5; $i++) {
+                            echo '<i class="'.($i <= $r['rating'] ? 'fas' : 'far').' fa-star text-warning"></i>';
+                        }
+                        $labels = [5 => '5 - Excellent', 4 => '4 - Very Good', 3 => '3 - Average', 2 => '2 - Poor', 1 => '1 - Terrible'];
+                        echo ' ' . $labels[$r['rating']];
+                        ?>
+                    </span>
+                    <i class="fas fa-chevron-down small"></i>
+                </button>
+                <ul class="dropdown-menu w-100 shadow-sm border-0 mt-1 rounded-3">
+                    <?php foreach($labels as $val => $text): ?>
+                        <li><a class="dropdown-item py-2 admin-rating-opt" href="#" data-value="<?php echo $val; ?>">
+                            <?php for($i=1; $i<=5; $i++) echo '<i class="'.($i <= $val ? 'fas' : 'far').' fa-star text-warning"></i>'; ?>
+                            <?php echo ' ' . $text; ?>
+                        </a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <input type="hidden" name="rating" class="admin-final-rating" value="<?php echo $r['rating']; ?>" required>
         </div>
         <div class="mb-3">
             <label>Message</label>
@@ -134,5 +152,20 @@ $reviews = $pdo->query("SELECT * FROM reviews ORDER BY id DESC")->fetchAll();
   </div>
 </div>
 <?php endforeach; ?>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const opts = document.querySelectorAll('.admin-rating-opt');
+    opts.forEach(opt => {
+        opt.addEventListener('click', function(e) {
+            e.preventDefault();
+            const val = this.getAttribute('data-value');
+            const parent = this.closest('.mb-3');
+            parent.querySelector('.admin-final-rating').value = val;
+            parent.querySelector('.selected-rating-text').innerHTML = this.innerHTML;
+        });
+    });
+});
+</script>
 
 <?php include 'includes/admin_footer.php'; ?>
