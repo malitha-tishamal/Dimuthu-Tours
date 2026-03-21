@@ -79,8 +79,8 @@ include 'includes/header.php';
     <div class="container hero-content text-center text-md-start position-relative" style="z-index: 2;">
         <div class="row">
             <div class="col-lg-8">
-                <h1 class="display-3 fw-bold mb-3 animate__animated animate__fadeInDown">Dimu Tour & Traveling</h1>
-                <p class="lead fs-3 mb-5 fw-light animate__animated animate__fadeInUp animate__delay-1s">Srilanka Best Travel Partner For Tourists</p>
+                <h1 class="display-3 fw-bold mb-3 animate__animated animate__fadeInDown"><?php echo htmlspecialchars($settings['hero_title']); ?></h1>
+                <p class="lead fs-3 mb-5 fw-light animate__animated animate__fadeInUp animate__delay-1s"><?php echo htmlspecialchars($settings['hero_subtitle']); ?></p>
                 <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-md-start animate__animated animate__fadeInUp animate__delay-2s">
                     <button class="btn btn-primary btn-lg rounded-pill px-5 shadow-sm" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</button>
                     <a href="<?php echo htmlspecialchars($settings['whatsapp_link'] ?? 'https://wa.me/'.str_replace(['+',' '], '', $settings['whatsapp'])); ?>" class="btn btn-success btn-lg rounded-pill px-5 shadow-sm" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp me-2"></i> WhatsApp Us</a>
@@ -200,7 +200,7 @@ include 'includes/header.php';
                      data-bs-toggle="modal" 
                      data-bs-target="#safariDetailsModal"
                      data-title="<?php echo htmlspecialchars($safari['title']); ?>"
-                     data-desc="<?php echo htmlspecialchars($safari['desc']); ?>"
+                     data-desc="<?php echo htmlspecialchars($safari['description']); ?>"
                      data-img="<?php echo htmlspecialchars($safari['image']); ?>"
                      style="cursor: pointer; transition: transform 0.3s ease;"
                      onmouseover="this.style.transform='translateY(-5px)'"
@@ -400,7 +400,11 @@ include 'includes/header.php';
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content border-0 shadow-lg">
       <div class="modal-header border-0 pb-0 position-absolute w-100 z-3">
-        <button type="button" class="btn-close btn-close-white bg-dark p-2 rounded-circle ms-auto me-3 mt-3 shadow" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close-custom bg-black bg-opacity-50 text-white border-0 rounded-circle d-flex align-items-center justify-content-center p-0 ms-auto me-3 mt-3 shadow" 
+                data-bs-dismiss="modal" aria-label="Close" style="width: 32px; height: 32px; transition: all 0.3s ease;">
+            <i class="fas fa-times"></i>
+        </button>
+
       </div>
       <div class="modal-body p-0">
         <img id="td-img" src="" class="img-fluid w-100 object-fit-cover" style="height: 300px;" alt="Tour Image">
@@ -434,7 +438,11 @@ include 'includes/header.php';
   <div class="modal-dialog modal-lg modal-dialog-centered">
     <div class="modal-content border-0 shadow-lg">
       <div class="modal-header border-0 pb-0 position-absolute w-100 z-3">
-        <button type="button" class="btn-close btn-close-white bg-dark p-2 rounded-circle ms-auto me-3 mt-3 shadow" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close-custom bg-black bg-opacity-50 text-white border-0 rounded-circle d-flex align-items-center justify-content-center p-0 ms-auto me-3 mt-3 shadow" 
+                data-bs-dismiss="modal" aria-label="Close" style="width: 32px; height: 32px; transition: all 0.3s ease;">
+            <i class="fas fa-times"></i>
+        </button>
+
       </div>
       <div class="modal-body p-0">
         <img id="sd-img" src="" class="img-fluid w-100 object-fit-cover" style="height: 350px;" alt="Safari Image">
