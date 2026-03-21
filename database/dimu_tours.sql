@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Mar 20, 2026 at 12:13 PM
+-- Generation Time: Mar 21, 2026 at 07:12 AM
 -- Server version: 9.1.0
 -- PHP Version: 8.3.14
 
@@ -128,7 +128,6 @@ INSERT INTO `memory_images` (`id`, `memory_id`, `image_path`) VALUES
 (6, 2, 'assets/memories/69bbb3533d450_0.jpeg'),
 (7, 2, 'assets/memories/69bbb3533db07_1.jpeg'),
 (8, 2, 'assets/memories/69bbb3533dd3b_2.jpeg'),
-(9, 2, 'assets/memories/69bbb3533dea9_3.jpeg'),
 (10, 2, 'assets/memories/69bbb3533e01b_4.jpeg'),
 (11, 3, 'assets/memories/69bbb3c776dd5_0.jpeg'),
 (12, 3, 'assets/memories/69bbb3c777157_1.jpeg'),
@@ -166,6 +165,34 @@ INSERT INTO `reviews` (`id`, `name`, `country`, `rating`, `message`, `image`, `s
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `safari_destinations`
+--
+
+DROP TABLE IF EXISTS `safari_destinations`;
+CREATE TABLE IF NOT EXISTS `safari_destinations` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) NOT NULL,
+  `description` text,
+  `image` varchar(255) DEFAULT NULL,
+  `status` enum('active','disabled') DEFAULT 'active',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `safari_destinations`
+--
+
+INSERT INTO `safari_destinations` (`id`, `title`, `description`, `image`, `status`) VALUES
+(1, 'Yala National Park', 'Yala is the most famous national park in Sri Lanka, known for having one of the highest densities of leopards in the world. Visitors can also see elephants, crocodiles, sloth bears, and a wide variety of birds. Perfect for an exciting and adventurous safari experience.', 'assets/yala.png', 'active'),
+(2, 'Udawalawe National Park', 'Udawalawe is the best place to see large herds of elephants in their natural habitat. The park offers open landscapes, making wildlife easy to spot. A great destination for families and nature lovers.', 'assets/udawalawe.png', 'active'),
+(3, 'Wilpattu National Park', 'Wilpattu is Sri Lanka’s largest national park, famous for its natural lakes (villus) and peaceful environment. It is home to leopards, deer, elephants, and many bird species. Ideal for those who prefer a quiet and less crowded safari.', 'assets/wilpattu.png', 'active'),
+(4, 'Minneriya National Park', 'Minneriya is world-famous for “The Gathering,” where hundreds of elephants come together around the reservoir during the dry season. This is one of the greatest wildlife spectacles in Asia.', 'assets/minneriya.png', 'active'),
+(5, 'Kaudulla National Park', 'Kaudulla is another excellent place to see elephants and diverse birdlife. It is often combined with Minneriya for a complete safari experience.', 'assets/kaudulla.png', 'active'),
+(6, 'Horton Plains National Park', 'Horton Plains offers a unique experience with cool climate, misty grasslands, and stunning viewpoints like World’s End. Visitors can spot deer, birds, and enjoy scenic nature walks.', 'assets/horton.png', 'active');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `site_settings`
 --
 
@@ -183,8 +210,8 @@ CREATE TABLE IF NOT EXISTS `site_settings` (
 --
 
 INSERT INTO `site_settings` (`id`, `key_name`, `value`) VALUES
-(1, 'hero_title', 'Explore the Wonders of Sri Lanka'),
-(2, 'hero_subtitle', 'Your Adventure Starts Here!'),
+(1, 'hero_title', 'Dimu Tour & Traveling'),
+(2, 'hero_subtitle', 'Srilanka Best Travel Partner For Tourists'),
 (3, 'phone1', '+94 71 163 5975'),
 (4, 'phone2', '+94 78 311 1827'),
 (5, 'email', 'info@dimutours.com'),
@@ -236,6 +263,32 @@ INSERT INTO `tours` (`id`, `title`, `description`, `duration`, `image`, `status`
 (1, 'Cultural Tours', 'Explore Sigiriya Rock, Ancient Cities, and Temples.', '5 Days / 4 Nights', 'uploads/69baee821995f.png', 'active'),
 (2, 'Wildlife Safari', 'Experience Yala and Udawalawe National Parks.', '3 Days / 2 Nights', 'https://images.unsplash.com/photo-1549366021-9f761d450615?q=80&w=600', 'active'),
 (3, 'Beach Getaways', 'Relax at the beautiful Southern beaches of Sri Lanka.', '4 Days / 3 Nights', 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=600', 'active');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tour_days`
+--
+
+DROP TABLE IF EXISTS `tour_days`;
+CREATE TABLE IF NOT EXISTS `tour_days` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `tour_id` int NOT NULL,
+  `day_number` int NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `description` text,
+  PRIMARY KEY (`id`),
+  KEY `tour_id` (`tour_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tour_days`
+--
+
+INSERT INTO `tour_days` (`id`, `tour_id`, `day_number`, `title`, `description`) VALUES
+(1, 3, 1, 'test', 'test'),
+(2, 3, 1, 'test', 'test'),
+(3, 3, 1, 'test', 'test');
 
 -- --------------------------------------------------------
 
