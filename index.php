@@ -22,6 +22,12 @@ unset($v); // Unset reference to avoid issues
 // Fetch Tours
 $stmt = $pdo->query("SELECT * FROM tours WHERE status='active' ORDER BY id DESC");
 $tours = $stmt->fetchAll(PDO::FETCH_ASSOC);
+foreach ($tours as &$tour) {
+    $it_stmt = $pdo->prepare("SELECT * FROM tour_days WHERE tour_id = ? ORDER BY day_number ASC");
+    $it_stmt->execute([$tour['id']]);
+    $tour['itinerary'] = $it_stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+unset($tour);
 
 // Fetch Approved Reviews
 $stmt = $pdo->query("SELECT * FROM reviews WHERE status='approved' ORDER BY id DESC LIMIT 5");
@@ -40,6 +46,10 @@ unset($memory);
 // Fetch Hero Slides
 $stmt = $pdo->query("SELECT * FROM hero_slides ORDER BY id ASC");
 $hero_slides = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Fetch Safari Destinations
+$stmt = $pdo->query("SELECT * FROM safari_destinations WHERE status='active' ORDER BY id ASC");
+$safaris = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 include 'includes/header.php';
 ?>
@@ -107,7 +117,8 @@ include 'includes/header.php';
                                 data-title="<?php echo htmlspecialchars($tour['title']); ?>"
                                 data-desc="<?php echo htmlspecialchars($tour['description']); ?>"
                                 data-dur="<?php echo htmlspecialchars($tour['duration']); ?>"
-                                data-img="<?php echo htmlspecialchars($tour['image']); ?>">
+                                data-img="<?php echo htmlspecialchars($tour['image']); ?>"
+                                data-itinerary='<?php echo htmlspecialchars(json_encode($tour['itinerary'])); ?>'>
                             View Details <i class="fas fa-arrow-right ms-2"></i>
                         </button>
                     </div>
@@ -174,41 +185,7 @@ include 'includes/header.php';
     </div>
 </section>
 
-<!-- Safari Destinations -->
-<?php
-$safaris = [
-    [
-        'title' => 'Yala National Park',
-        'desc' => 'Yala is the most famous national park in Sri Lanka, known for having one of the highest densities of leopards in the world. Visitors can also see elephants, crocodiles, sloth bears, and a wide variety of birds. Perfect for an exciting and adventurous safari experience.',
-        'image' => 'assets/yala.png'
-    ],
-    [
-        'title' => 'Udawalawe National Park',
-        'desc' => 'Udawalawe is the best place to see large herds of elephants in their natural habitat. The park offers open landscapes, making wildlife easy to spot. A great destination for families and nature lovers.',
-        'image' => 'assets/udawalawe.png'
-    ],
-    [
-        'title' => 'Wilpattu National Park',
-        'desc' => 'Wilpattu is Sri Lanka’s largest national park, famous for its natural lakes (villus) and peaceful environment. It is home to leopards, deer, elephants, and many bird species. Ideal for those who prefer a quiet and less crowded safari.',
-        'image' => 'assets/wilpattu.png'
-    ],
-    [
-        'title' => 'Minneriya National Park',
-        'desc' => 'Minneriya is world-famous for “The Gathering,” where hundreds of elephants come together around the reservoir during the dry season. This is one of the greatest wildlife spectacles in Asia.',
-        'image' => 'assets/minneriya.png'
-    ],
-    [
-        'title' => 'Kaudulla National Park',
-        'desc' => 'Kaudulla is another excellent place to see elephants and diverse birdlife. It is often combined with Minneriya for a complete safari experience.',
-        'image' => 'assets/kaudulla.png'
-    ],
-    [
-        'title' => 'Horton Plains National Park',
-        'desc' => 'Horton Plains offers a unique experience with cool climate, misty grasslands, and stunning viewpoints like World’s End. Visitors can spot deer, birds, and enjoy scenic nature walks.',
-        'image' => 'assets/horton.png'
-    ]
-];
-?>
+<!-- Safari Destinations Section -->
 <section class="section-padding bg-white" id="safari">
     <div class="container">
         <div class="text-center mb-5">
@@ -432,7 +409,14 @@ $safaris = [
                 <span class="badge bg-success px-3 py-2 fs-6 rounded-pill" id="td-dur"></span>
             </div>
             <h2 class="fw-bold mb-3" id="td-title"></h2>
-            <p class="text-muted lh-lg" id="td-desc"></p>
+            <p class="text-muted lh-lg mb-4" id="td-desc"></p>
+            
+            <div id="td-itinerary-section" class="d-none">
+                <h5 class="fw-bold mb-3 text-dark border-bottom pb-2"><i class="fas fa-route me-2 text-primary"></i>Tour Itinerary</h5>
+                <div class="accordion accordion-flush" id="itineraryAccordion">
+                    <!-- Days will be injected here -->
+                </div>
+            </div>
             
             <hr class="my-4">
             <div class="text-center">
@@ -559,6 +543,35 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('td-desc').textContent = desc;
             document.getElementById('td-dur').textContent = dur;
             document.getElementById('td-img').src = img;
+
+            // Itinerary Handling
+            const itinSection = document.getElementById('td-itinerary-section');
+            const itinAccordion = document.getElementById('itineraryAccordion');
+            const itinerary = JSON.parse(button.getAttribute('data-itinerary') || '[]');
+
+            itinAccordion.innerHTML = '';
+            if (itinerary.length > 0) {
+                itinSection.classList.remove('d-none');
+                itinerary.forEach((day, index) => {
+                    const dayHtml = `
+                        <div class="accordion-item border-0 border-bottom">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button ${index === 0 ? '' : 'collapsed'} py-3 px-0 bg-transparent shadow-none fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#day${day.id}">
+                                    <span class="text-primary me-2">Day ${day.day_number}:</span> ${day.title}
+                                </button>
+                            </h2>
+                            <div id="day${day.id}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" data-bs-parent="#itineraryAccordion">
+                                <div class="accordion-body px-0 py-2 text-muted small">
+                                    ${day.description.replace(/\n/g, '<br>')}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    itinAccordion.insertAdjacentHTML('beforeend', dayHtml);
+                });
+            } else {
+                itinSection.classList.add('d-none');
+            }
             
             // Set the "Book This Tour" button to open the global booking modal and pre-select this tour
             const bookBtn = document.getElementById('bookThisTourBtn');
