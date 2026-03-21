@@ -34,6 +34,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         <div class="py-3">
             <a href="dashboard.php" class="<?php echo $current_page == 'dashboard.php' ? 'active' : ''; ?>"><i class="fas fa-home ms-2 me-3"></i>Dashboard</a>
             <a href="tours.php" class="<?php echo $current_page == 'tours.php' ? 'active' : ''; ?>"><i class="fas fa-map ms-2 me-3"></i>Manage Tours</a>
+            <a href="safaris.php" class="<?php echo $current_page == 'safaris.php' ? 'active' : ''; ?>"><i class="fas fa-leaf ms-2 me-3"></i>Manage Safaris</a>
             <a href="bookings.php" class="<?php echo $current_page == 'bookings.php' ? 'active' : ''; ?>"><i class="fas fa-calendar-check ms-2 me-3"></i>Tour Bookings</a>
             <a href="taxi_bookings.php" class="<?php echo $current_page == 'taxi_bookings.php' ? 'active' : ''; ?>"><i class="fas fa-taxi ms-2 me-3"></i>Taxi Bookings</a>
             <a href="memories.php" class="<?php echo $current_page == 'memories.php' ? 'active' : ''; ?>"><i class="fas fa-camera-retro ms-2 me-3"></i>Travel Memories</a>
