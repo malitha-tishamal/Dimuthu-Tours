@@ -103,6 +103,8 @@ $tours = $pdo->query("SELECT * FROM tours ORDER BY id DESC")->fetchAll();
                                 <?php endif; ?>
                             </form>
                             
+                            <a href="tour_itinerary.php?tour_id=<?php echo $tour['id']; ?>" class="btn btn-sm btn-outline-info" title="Manage Itinerary"><i class="fas fa-calendar-alt"></i></a>
+                            
                             <button type="button" class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#editTourModal<?php echo $tour['id']; ?>" title="Edit"><i class="fas fa-edit"></i></button>
 
                             <form method="POST" class="d-inline" onsubmit="return confirm('Delete this tour?');">
