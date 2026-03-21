@@ -13,7 +13,11 @@
     <div class="modal-content border-0 shadow-lg">
       <div class="modal-header bg-primary text-white border-0">
         <h5 class="modal-title" id="bookingModalLabel"><i class="fas fa-calendar-check me-2"></i>Book Your Adventure</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close-custom bg-white bg-opacity-25 text-white border-0 rounded-circle d-flex align-items-center justify-content-center p-0 ms-auto shadow-sm" 
+                data-bs-dismiss="modal" aria-label="Close" style="width: 28px; height: 28px; transition: all 0.3s ease;">
+            <i class="fas fa-times fs-6"></i>
+        </button>
+
       </div>
       <div class="modal-body p-4">
         <form id="globalBookingForm">
@@ -66,7 +70,11 @@
     <div class="modal-content border-0 shadow-lg">
       <div class="modal-header bg-primary text-white border-0">
         <h5 class="modal-title"><i class="fas fa-taxi me-2"></i>Book a Taxi</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close-custom bg-white bg-opacity-25 text-white border-0 rounded-circle d-flex align-items-center justify-content-center p-0 ms-auto shadow-sm" 
+                data-bs-dismiss="modal" aria-label="Close" style="width: 28px; height: 28px; transition: all 0.3s ease;">
+            <i class="fas fa-times fs-6"></i>
+        </button>
+
       </div>
       <div class="modal-body p-4">
         <form id="taxiForm">
