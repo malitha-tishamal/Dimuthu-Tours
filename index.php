@@ -79,8 +79,8 @@ include 'includes/header.php';
     <div class="container hero-content text-center text-md-start position-relative" style="z-index: 2;">
         <div class="row">
             <div class="col-lg-8">
-                <h1 class="display-3 fw-bold mb-3 animate__animated animate__fadeInDown"><?php echo htmlspecialchars($settings['hero_title']); ?></h1>
-                <p class="lead fs-3 mb-5 fw-light animate__animated animate__fadeInUp animate__delay-1s"><?php echo htmlspecialchars($settings['hero_subtitle']); ?></p>
+                <h1 class="display-3 fw-bold mb-3 animate__animated animate__fadeInDown">Dimu Tour & Traveling</h1>
+                <p class="lead fs-3 mb-5 fw-light animate__animated animate__fadeInUp animate__delay-1s">Srilanka Best Travel Partner For Tourists</p>
                 <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-md-start animate__animated animate__fadeInUp animate__delay-2s">
                     <button class="btn btn-primary btn-lg rounded-pill px-5 shadow-sm" data-bs-toggle="modal" data-bs-target="#bookingModal">Book Now</button>
                     <a href="<?php echo htmlspecialchars($settings['whatsapp_link'] ?? 'https://wa.me/'.str_replace(['+',' '], '', $settings['whatsapp'])); ?>" class="btn btn-success btn-lg rounded-pill px-5 shadow-sm" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp me-2"></i> WhatsApp Us</a>
@@ -150,7 +150,7 @@ include 'includes/header.php';
                         <div class="carousel-inner">
                             <?php foreach($memory['images'] as $index => $img): ?>
                             <div class="carousel-item <?php echo $index == 0 ? 'active' : ''; ?>">
-                                <img src="<?php echo htmlspecialchars($img); ?>" class="d-block w-100" style="height: 250px; object-fit: cover;" alt="Memory Photo">
+                                <img src="<?php echo htmlspecialchars($img); ?>" class="d-block w-100" style="height: 250px; object-fit: cover;" alt="Dimu Tour & Traveling - Travel Memory">
                             </div>
                             <?php endforeach; ?>
                         </div>
@@ -190,7 +190,7 @@ include 'includes/header.php';
     <div class="container">
         <div class="text-center mb-5">
             <h2 class="section-title fw-bold text-dark">Top Wildlife Safari Destinations in Sri Lanka</h2>
-            <p class="text-muted">Experience the wild beauty of Sri Lanka</p>
+            <p class="text-muted">Experience the wild beauty of Sri Lanka with Dimuthu Tour - Southern Province Best travel Tour Host</p>
         </div>
         
         <div class="row g-4">
@@ -740,7 +740,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <a href="https://github.com/malitha-tishamal" target="_blank" class="btn btn-outline-secondary btn-sm rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;"><i class="bi bi-github"></i></a>
             </div>
             <a href="https://wa.me/94785530992" target="_blank" class="btn btn-success rounded-pill px-4 fw-bold">
-                <i class="fab fa-whatsapp me-2"></i> Hire the Developer
+                <i class="fab fa-whatsapp me-2"></i> Hire the Developer - Malitha Tishamal
             </a>
         </div>
     </div>
