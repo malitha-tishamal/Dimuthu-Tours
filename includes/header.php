@@ -6,10 +6,25 @@ require_once __DIR__ . '/db.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dimu Tour & Traveling | Sri Lanka</title>
+    <title>Dimu Tour & Traveling | Srilanka Best Travel Partner For Tourists</title>
     <link rel="icon" type="image/jpeg" href="assets/logo.jpg">
-    <meta name="description" content="Explore the wonders of Sri Lanka with Dimu Tour & Traveling. Private tours, wildlife safaris, beach getaways, and more.">
-    <meta name="keywords" content="Sri Lanka Tours, Sri Lanka Travel Packages, Private Tours Sri Lanka, Wildlife Safari Sri Lanka">
+    <meta name="description" content="Dimu Tour & Traveling (Dimuthu Tour) is the Southern Province Best travel Tour Host. Experience the best of Sri Lanka with our private tours and safaris. Srilanka Best Travel Partner For Tourists. Developed By Malitha Tishamal.">
+    <meta name="keywords" content="Dimu Tour, Dimuthu Tour, Southern Province Best travel Tour Host, Srilanka Best Travel Partnr For Tourists, Developed By Malitha Tishamal, Sri Lanka Tours, Sri Lanka Travel, Best Tour Guide Sri Lanka">
+    <meta name="author" content="Malitha Tishamal">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://dimutours.com/">
+    <meta property="og:title" content="Dimu Tour & Traveling | Srilanka Best Travel Partner For Tourists">
+    <meta property="og:description" content="Southern Province Best travel Tour Host. Sri Lanka's leading travel partner for unforgettable journeys. Developed By Malitha Tishamal.">
+    <meta property="og:image" content="assets/logo.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://dimutours.com/">
+    <meta property="twitter:title" content="Dimu Tour & Traveling | Srilanka Best Travel Partner For Tourists">
+    <meta property="twitter:description" content="Southern Province Best travel Tour Host. Sri Lanka's leading travel partner for unforgettable journeys. Developed By Malitha Tishamal.">
+    <meta property="twitter:image" content="assets/logo.jpg">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,7 +50,7 @@ require_once __DIR__ . '/db.php';
     <div class="container">
         <!-- Logo -->
         <a class="navbar-brand" href="index.php">
-            <img src="assets/logo.jpg" alt="Dimu Tour Travels" style="max-height: 65px; object-fit: contain;">
+            <img src="assets/logo.jpg" alt="Dimu Tour & Traveling (Dimuthu Tour) - Srilanka Best Travel Partner For Tourists" style="max-height: 65px; object-fit: contain;">
         </a>
         <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain">
             <span class="navbar-toggler-icon"></span>
