@@ -445,3 +445,5 @@ h6 {
     cursor: zoom-in;
     pointer-events: auto;
 }
+/* Custom Modal Close Button */
+.btn-close-custom:hover { background-color: rgba(0, 0, 0, 0.8) !important; transform: scale(1.1); }
