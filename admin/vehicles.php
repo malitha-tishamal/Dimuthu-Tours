@@ -90,6 +90,7 @@ foreach ($vehicles as &$v) {
     $stmt->execute([$v['id']]);
     $v['images'] = $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
+unset($v);
 ?>
 
 <div class="d-flex justify-content-between align-items-center mb-4">
