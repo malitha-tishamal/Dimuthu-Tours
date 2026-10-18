@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dimu Tours — Tour & Traveling | Full Detailed Project Report</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Inter',sans-serif;background:#fff;color:#1a1a2e;font-size:13px;line-height:1.7}
+  .cover{background:linear-gradient(135deg,#0d6efd 0%,#0dcaf0 100%);color:#fff;padding:80px 60px;min-height:350px;display:flex;flex-direction:column;justify-content:center;page-break-after:always}
+  .cover h1{font-size:42px;font-weight:800;letter-spacing:-1px;margin-bottom:8px}
+  .cover .subtitle{font-size:18px;font-weight:300;opacity:.85;margin-bottom:32px}
+  .cover-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+  .cover-item{background:rgba(255,255,255,.15);border-radius:10px;padding:12px 16px;backdrop-filter:blur(8px)}
+  .cover-item .label{font-size:10px;text-transform:uppercase;letter-spacing:1px;opacity:.7}
+  .cover-item .value{font-size:13px;font-weight:600;margin-top:2px}
+  .badge-row{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap}
+  .badge{background:rgba(255,255,255,.2);border-radius:20px;padding:5px 14px;font-size:11px;font-weight:500;border:1px solid rgba(255,255,255,.3)}
+  .content{padding:40px 60px}
+  h2{font-size:22px;font-weight:700;color:#0d6efd;border-bottom:3px solid #0d6efd;padding-bottom:8px;margin:40px 0 20px}
+  h3{font-size:18px;font-weight:700;color:#1a1a2e;margin:32px 0 12px}
+  h4{font-size:14px;font-weight:600;color:#0d6efd;margin:20px 0 10px}
+  p{margin-bottom:14px;color:#2d2d44; text-align: justify;}
+  ul,ol{margin:10px 0 16px 20px;color:#2d2d44}
+  li{margin-bottom:6px}
+  pre{background:#f8faff;border:1px solid #d1e1ff;border-radius:10px;padding:18px;font-family:'JetBrains Mono',monospace;font-size:11px;overflow-x:auto;margin:16px 0;color:#2d2d44;white-space:pre-wrap;word-break:break-word}
+  code{background:#f0f4ff;padding:2px 6px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:11px;color:#0d6efd}
+  table{width:100%;border-collapse:collapse;margin:18px 0;font-size:12px}
+  th{background:#0d6efd;color:#fff;padding:12px 14px;text-align:left;font-weight:600}
+  td{padding:10px 14px;border-bottom:1px solid #ebf0ff;color:#2d2d44; vertical-align: top;}
+  tr:nth-child(even) td{background:#f7f9ff}
+  tr:hover td{background:#edf2ff}
+  .section-block{background:#f7f9ff;border-left:5px solid #0dcaf0;border-radius:0 12px 12px 0;padding:20px 24px;margin:24px 0}
+  .highlight{color:#0d6efd;font-weight:700}
+  .testimonial-box{background:linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%); border: 1px solid #bae6fd; border-radius: 16px; padding: 30px; margin: 30px 0;}
+  .footer{text-align:center;padding:30px;color:#888;font-size:11px;border-top:1px solid #eee;margin-top:40px}
+  @media print{
+    body{font-size:11px}
+    .cover{padding:60px 40px}
+    .content{padding:30px 40px}
+    h2{page-break-before:auto}
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover">
+  <h1>Dimu Tours</h1>
+  <div class="subtitle">Tour & Traveling Management System — Fully Detailed Project Report</div>
+  <div class="cover-grid">
+    <div class="cover-item"><div class="label">Platform</div><div class="value">Web (PHP/MySQL)</div></div>
+    <div class="cover-item"><div class="label">Backend</div><div class="value">PHP 8.x (Procedural with PDO)</div></div>
+    <div class="cover-item"><div class="label">Version</div><div class="value">1.0.0</div></div>
+    <div class="cover-item"><div class="label">Developer</div><div class="value">Malitha Tishamal</div></div>
+    <div class="cover-item"><div class="label">Institution</div><div class="value">Customer Project</div></div>
+    <div class="cover-item"><div class="label">Frontend</div><div class="value">Bootstrap 5.3 & Vanilla JS</div></div>
+  </div>
+  <div class="badge-row">
+    <span class="badge">Responsive</span><span class="badge">Admin Dashboard</span><span class="badge">AJAX Engine</span>
+    <span class="badge">May 2026</span>
+  </div>
+</div>
+
+<!-- CONTENT -->
+<div class="content">
+
+<h2>1. Project Overview</h2>
+<p>The Dimu Tour & Traveling website is a high-performance, responsive web application built for a premier tourism and taxi service provider in Sri Lanka. It replaces traditional static information with a dynamic, data-driven experience. The application features a stunning customer-facing frontend to explore tours, safaris, and vehicle options, paired with a robust administrative dashboard for comprehensive business management. By integrating real-time lead generation via WhatsApp and an asynchronous booking system, the platform ensures maximum conversion and operational efficiency.</p>
+
+<h2>2. Technology Stack &amp; Dependencies</h2>
+<table>
+<tr><th>Category</th><th>Technology / Tool</th><th>Purpose</th></tr>
+<tr><td>Server Environment</td><td>WAMP Server</td><td>Local hosting environment for Apache, PHP, and MySQL</td></tr>
+<tr><td>Backend Language</td><td>PHP 8.2</td><td>Core server-side processing engine</td></tr>
+<tr><td>Database</td><td>MySQL (MariaDB)</td><td>Relational database for tours, vehicles, and inquiries</td></tr>
+<tr><td>DB Access</td><td>PDO (PHP Data Objects)</td><td>Secure, object-oriented database abstraction with prepared statements</td></tr>
+<tr><td>UI Framework</td><td>Bootstrap 5.3.0</td><td>Responsive mobile-first grid system and UI components</td></tr>
+<tr><td>Icons</td><td>FontAwesome 6.4.0</td><td>Vector icons for visual enhancement</td></tr>
+<tr><td>Styling</td><td>Vanilla CSS3</td><td>Custom glassmorphism, animations, and branding</td></tr>
+<tr><td>Client-side Logic</td><td>Vanilla JavaScript</td><td>AJAX handling via Fetch API and DOM manipulation</td></tr>
+<tr><td>Communication</td><td>WhatsApp API</td><td>Direct lead redirection to the client's business number</td></tr>
+<tr><td>Authentication</td><td>PHP Sessions</td><td>Secure admin session management with BCRYPT hashing</td></tr>
+</table>
+
+<h2>3. App Architecture Breakdown</h2>
+<pre>Dimu Tours/
+├── index.php                     ← Primary Customer Landing Page
+├── booking.php                   ← Asynchronous Booking Processor
+├── review.php                    ← Asynchronous Review Submission
+├── includes/                     ← Shared Frontend Components
+│   ├── db.php                    ← Central PDO Database Connection
+│   ├── header.php                ← Navigation & SEO Meta
+│   └── footer.php                ← Site Credits & JS Initialization
+├── admin/                        ← Management Dashboard Module
+│   ├── dashboard.php             ← Business Overview Statistics
+│   ├── tours.php                 ← Tour Package CRUD
+│   ├── vehicles.php              ← Fleet & Gallery Manager
+│   ├── reviews.php               ← Feedback Moderation Engine
+│   └── includes/                 ← Admin Specific Shared Components
+├── assets/                       ← Static CSS, JS, and Static Imagery
+└── uploads/                      ← Central Storage for User/Admin Media</pre>
+
+<h2>4. Frontend Module Detailed View</h2>
+
+<h3>4.1 index.php (The Hub)</h3>
+<p>The primary entry point. It dynamically orchestrates the loading of all business content from the database. It features a hero slider, tour cards, safari highlights, vehicle galleries, and the travel memory blog.</p>
+<table>
+<tr><th>Logic Block</th><th>Description</th></tr>
+<tr><td>Hero Slider Query</td><td>Fetches all active hero slides from `hero_slides` table to populate the top banner.</td></tr>
+<tr><td>Tour Card Fetch</td><td>Retrieves active tour packages, including their day-by-day itineraries for modal display.</td></tr>
+<tr><td>Vehicle Fleet Query</td><td>Pulls vehicle specs and links to the `vehicle_images` table for the gallery.</td></tr>
+<tr><td>AJAX Integration</td><td>Initializes Fetch API listeners for the booking and review forms to prevent page reloads.</td></tr>
+</table>
+
+<h3>4.2 booking.php</h3>
+<p>A headless PHP script designed to process incoming customer leads asynchronously. It ensures data integrity and triggers the communication pipeline.</p>
+<table>
+<tr><th>Logic Block</th><th>Description</th></tr>
+<tr><td>Input Sanitization</td><td>Trims and filters all incoming POST data to prevent malicious injections.</td></tr>
+<tr><td>Lead Capture</td><td>Inserts the inquiry details into the `bookings` table for long-term tracking.</td></tr>
+<tr><td>WhatsApp Link Generator</td><td>Dynamically constructs a pre-filled WhatsApp URL and returns it in the JSON response.</td></tr>
+</table>
+
+<h2>5. Admin Module Detailed View (lib/admin/)</h2>
+
+<h3>5.1 dashboard.php</h3>
+<p>Provides a real-time snapshot of the business operations. It calculates key metrics from across the database.</p>
+<table>
+<tr><th>Statistic</th><th>Source Calculation</th></tr>
+<tr><td>Total Tours</td><td>`SELECT COUNT(*) FROM tours`</td></tr>
+<tr><td>Total Bookings</td><td>`SELECT COUNT(*) FROM bookings`</td></tr>
+<tr><td>Total Reviews</td><td>`SELECT COUNT(*) FROM reviews`</td></tr>
+<tr><td>Active Vehicles</td><td>`SELECT COUNT(*) FROM vehicles WHERE status='active'`</td></tr>
+</table>
+
+<h3>5.2 tours.php</h3>
+<p>The core content management script for tour packages. It handles complex data entry and media management.</p>
+<table>
+<tr><th>Function / Logic</th><th>Description</th></tr>
+<tr><td>_addTour()</td><td>Handles the multipart form data, validates the image upload, and generates a new record.</td></tr>
+<tr><td>_editTour()</td><td>Allows modification of titles, descriptions, and durations with optional image replacement.</td></tr>
+<tr><td>_toggleStatus()</td><td>Instantly publishes or unpublishes a tour from the frontend using a single SQL update.</td></tr>
+<tr><td>_deleteTour()</td><td>Removes the tour record and any associated itinerary days from the system.</td></tr>
+</table>
+
+<h3>5.3 tour_itinerary.php</h3>
+<p>A specialized sub-manager for the day-by-day breakdown of tours, providing high-resolution details to potential customers.</p>
+<table>
+<tr><th>Function / Logic</th><th>Description</th></tr>
+<tr><td>_addDay()</td><td>Links a specific itinerary day to a parent tour ID.</td></tr>
+<tr><td>_reorderDays()</td><td>Allows admins to adjust the sequence of events within a tour package.</td></tr>
+</table>
+
+<h2>6. Database Schema Detailed View</h2>
+<table>
+<tr><th>Table Name</th><th>Purpose</th><th>Key Columns</th></tr>
+<tr><td><code>site_settings</code></td><td>Global business configuration</td><td>key_name, value</td></tr>
+<tr><td><code>tours</code></td><td>Master tour package data</td><td>id, title, duration, image, status</td></tr>
+<tr><td><code>tour_days</code></td><td>Day-wise itinerary (1-to-Many)</td><td>id, tour_id, day_number, title, description</td></tr>
+<tr><td><code>vehicles</code></td><td>Transportation fleet specs</td><td>id, name, pax_count, icon_class, status</td></tr>
+<tr><td><code>vehicle_images</code></td><td>Multi-image storage for vehicles</td><td>id, vehicle_id, image_path</td></tr>
+<tr><td><code>reviews</code></td><td>Customer feedback moderation</td><td>id, name, rating, message, status</td></tr>
+<tr><td><code>travel_memories</code></td><td>Blogging and past event gallery</td><td>id, title, location, event_date, status</td></tr>
+<tr><td><code>admins</code></td><td>Secured access credentials</td><td>id, username, password (BCRYPT)</td></tr>
+</table>
+
+<h2>7. Feature Completeness Summary</h2>
+<table>
+<tr><th>Feature</th><th>Public Visitor Experience</th><th>Administrator Management</th></tr>
+<tr><td>Authentication</td><td>❌ None required</td><td>✅ Secure Session-based Login</td></tr>
+<tr><td>Tour Browsing</td><td>✅ View Details & Itineraries</td><td>✅ Add, Edit, Delete, Toggle</td></tr>
+<tr><td>Vehicle Fleet</td><td>✅ Explore Gallery & Capacity</td><td>✅ Manage Fleet & Multi-Image Upload</td></tr>
+<tr><td>Booking System</td><td>✅ AJAX Submit & WhatsApp Redirect</td><td>✅ Review Booking Logs</td></tr>
+<tr><td>Review System</td><td>✅ Submit Review (Pending)</td><td>✅ Moderate, Approve, Edit Feedback</td></tr>
+<tr><td>Contact & Maps</td><td>✅ Interactive Google Maps</td><td>✅ Edit Global Contact Details</td></tr>
+<tr><td>Site Content</td><td>✅ Real-time Updates</td><td>✅ Full Hero Slider & Text Control</td></tr>
+</table>
+
+<h2>8. Client Success & Feedback</h2>
+<div class="testimonial-box">
+  <p class="highlight">"Hi Malitha, I just wanted to take a moment to sincerely thank you for the amazing work you did on my website for Dimu Tour & Travel. You understood exactly what I needed and delivered it in a very attractive and professional way, and that too in such a short time. I truly appreciate your creativity, effort, and dedication. The website looks exactly how I imagined it – even better!"</p>
+  <p class="mt-2 text-end"><strong>— Dimuthu Weerasinghe</strong><br><small>Owner, Dimu Tour & Traveling</small></p>
+</div>
+
+<div class="footer">
+  Report generated: May 2026 &nbsp;|&nbsp; Dimu Tours v1.0.0 &nbsp;|&nbsp; Developed by Malitha Tishamal &nbsp;|&nbsp; Custom Project for Dimuthu Weerasinghe
+</div>
+
+</div><!-- /content -->
+</body>
+</html>
