@@ -1,0 +1,39 @@
+# ── Database credentials ──────────────────────────────
+includes/db.php
+
+# ── Database setup/migration scripts (contain hardcoded paths) ────
+setup_db.php
+alter_db.php
+sql/init_db.php
+sql/init_hero.php
+sql/update_memories.php
+
+# ── SQL dumps ─────────────────────────────────────────
+*.sql
+database/
+
+# ── Uploaded user content ─────────────────────────────
+uploads/
+assets/hero/
+assets/memories/
+
+# ── Compressed archives ──────────────────────────────
+*.zip
+*.tar.gz
+*.rar
+
+# ── OS / Editor files ────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# ── PHP / Environment ────────────────────────────────
+.env
+.env.*
+*.log
