@@ -1,3 +1,6 @@
+# ── Backup folder ─────────────────────────────────────
+git changes/
+
 # ── Database credentials ──────────────────────────────
 includes/db.php
 
