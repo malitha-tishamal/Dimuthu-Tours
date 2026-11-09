@@ -1,6 +1,9 @@
 # ── Backup folder ─────────────────────────────────────
 git changes/
 
+# ── Standalone landing page (not part of the PHP app) ─
+landing-page/
+
 # ── Database credentials ──────────────────────────────
 includes/db.php
 
